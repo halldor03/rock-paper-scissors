@@ -1,64 +1,23 @@
-console.log("Hello world");
 let choices = ["rock", "paper", "scissors"];
 
-function computerPlay() {
-  let computerSelection = choices[Math.floor(Math.random() * choices.length)];
-  return computerSelection;
+function playRound() {
+  for (let i = 0; i < 5; i++) {
+    let computerSelection = choices[Math.floor(Math.random() * choices.length)];
+    // check computer choice:
+    alert(computerSelection);
+    let playerSelection = prompt("rock, paper or scissors?");
+
+    if (playerSelection === computerSelection) {
+      alert("It's a draw!");
+    } else if (
+      (playerSelection === "scissors" && computerSelection === "paper") ||
+      (playerSelection === "rock" && computerSelection === "scissors") ||
+      (playerSelection === "paper" && computerSelection === "rock")
+    ) {
+      alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+    } else {
+      alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+    }
+  }
 }
-function playerPlay() {
-  let playerSelection = prompt("rock, paper or scissors?");
-  return playerSelection;
-}
-// function playRound() {
-//   // to check computer choice:
-//   alert(computerPlay());
-//   computerPlay();
-//   playerPlay();
-//   if (
-//     (playerPlay() === "paper" && computerPlay() === "rock") ||
-//     (playerPlay() === "scissors" && computerPlay() === "paper") ||
-//     (playerPlay() === "rock" && computerPlay() === "scissors")
-//   ) {
-//     alert("You win! <3");
-//   } else if (
-//     (playerPlay() === "paper" && computerPlay() === "paper") ||
-//     (playerPlay() === "scissors" && computerPlay() === "scissors") ||
-//     (playerPlay() === "rock" && computerPlay() === "rock")
-//   ) {
-//     alert("Tie!");
-//   } else {
-//     alert("You lose! :(");
-//   }
-// }
-// playRound();
-
-// function test1() {
-//   return computerPlay;
-// }
-
-// function test2() {
-//   return playerPlay;
-// }
-
-// function playRound() {
-//   // to check computer choice:
-//   alert(computerPlay());
-// test1()
-// test2()
-//   if (
-//     (playerPlay === "paper" && computerPlay === "rock") ||
-//     (playerPlay === "scissors" && computerPlay === "paper") ||
-//     (playerPlay === "rock" && computerPlay === "scissors")
-//   ) {
-//     alert("You win! <3");
-//   } else if (
-//     (playerPlay === "paper" && computerPlay === "paper") ||
-//     (playerPlay === "scissors" && computerPlay === "scissors") ||
-//     (playerPlay === "rock" && computerPlay === "rock")
-//   ) {
-//     alert("Tie!");
-//   } else {
-//     alert("You lose! :(");
-//   }
-// }
-// playRound();
+playRound();
