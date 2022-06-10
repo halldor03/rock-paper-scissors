@@ -7,9 +7,10 @@ function computerPlay() {
 }
 function playerPlay() {
   let result = prompt("rock, paper or scissors?");
+  let result_lowercase = result.toLowerCase();
   // to check my choice:
-  console.log("My choice:" + result);
-  return result;
+  console.log("My choice:" + result_lowercase);
+  return result_lowercase;
 }
 
 function playRound(computerSelection, playerSelection) {
