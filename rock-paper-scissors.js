@@ -1,23 +1,36 @@
-let choices = ["rock", "paper", "scissors"];
+function computerPlay() {
+  let choices = ["rock", "paper", "scissors"];
+  let result = choices[Math.floor(Math.random() * choices.length)];
+  // to check computer's choice:
+  console.log("Comp choice:" + result);
+  return result;
+}
+function playerPlay() {
+  let result = prompt("rock, paper or scissors?");
+  // to check my choice:
+  console.log("My choice:" + result);
+  return result;
+}
 
-function playRound() {
-  for (let i = 0; i < 5; i++) {
-    let computerSelection = choices[Math.floor(Math.random() * choices.length)];
-    // check computer choice:
-    alert(computerSelection);
-    let playerSelection = prompt("rock, paper or scissors?");
-
-    if (playerSelection === computerSelection) {
-      alert("It's a draw!");
-    } else if (
-      (playerSelection === "scissors" && computerSelection === "paper") ||
-      (playerSelection === "rock" && computerSelection === "scissors") ||
-      (playerSelection === "paper" && computerSelection === "rock")
-    ) {
-      alert(`You win! ${playerSelection} beats ${computerSelection}!`);
-    } else {
-      alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
-    }
+function playRound(computerSelection, playerSelection) {
+  if (computerSelection == playerSelection) {
+    console.log("It's a draw!");
+  } else if (
+    (playerSelection == "scissors" && computerSelection == "paper") ||
+    (playerSelection == "rock" && computerSelection == "scissors") ||
+    (playerSelection == "paper" && computerSelection == "rock")
+  ) {
+    console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
+  } else if (
+    (computerSelection == "scissors" && playerSelection == "paper") ||
+    (computerSelection == "rock" && playerSelection == "scissors") ||
+    (computerSelection == "paper" && playerSelection == "rock")
+  ) {
+    console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
+  } else if (playerSelection == null || playerSelection == "") {
+    alert("You forfeited the game!");
+  } else {
+    alert(`Wrong choice, must be "rock", "paper" or "scissors"!`);
   }
 }
-playRound();
+playRound(computerPlay(), playerPlay());
