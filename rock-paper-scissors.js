@@ -49,35 +49,46 @@ function playRound(computerSelection, playerSelection) {
   }
 }
 
-function scoring(computerSelection, playerSelection) {
-  let playerPoints = 0;
-  let computerPoints = 0;
+function scoring(computerSelection, playerSelection, scb) {
+  // tutaj nazwa scb zeby pokazac ze to nie musi byc konieczne obiekt zdefinowany w variable scoreboard, tylko wszystko co podamy tej funkcji
   if (
     (playerSelection == "scissors" && computerSelection == "paper") ||
     (playerSelection == "rock" && computerSelection == "scissors") ||
     (playerSelection == "paper" && computerSelection == "rock")
   ) {
-    playerPoints += 1;
-    console.log(`Your points: ${playerPoints}`);
-    console.log(`Computer points: ${computerPoints}`);
+    scb.wins += 1;
+    console.log(`Your points: ${scb.wins}`);
+    console.log(`Computer points: ${scb.losses}`);
   } else if (
     (computerSelection == "scissors" && playerSelection == "paper") ||
     (computerSelection == "rock" && playerSelection == "scissors") ||
     (computerSelection == "paper" && playerSelection == "rock")
   ) {
-    computerPoints += 1;
-    console.log(`Your points: ${playerPoints}`);
-    console.log(`Computer points: ${computerPoints}`);
+    scb.losses += 1;
+    console.log(`Your points: ${scb.wins}`);
+    console.log(`Computer points: ${scb.losses}`);
   }
+  return [scb.wins, scb.losses];
 }
 
 function playGame(numberOfGames) {
+  scoreboard = {
+    wins: 0,
+    losses: 0,
+  };
   for (let i = 0; i < numberOfGames; i++) {
     let computerSelection = computerPlay();
     let playerSelection = playerPlay();
     playRound(computerSelection, playerSelection);
-    scoring(computerSelection, playerSelection);
+    [scoreboard.wins, scoreboard.losses] = scoring(
+      computerSelection,
+      playerSelection,
+      scoreboard
+    ); // tutaj ten argument jest opcjonalny
+    // bo ta funkcja i tak ma dostep do tego variable
+    // ale ja lubie jak wszystko jest od siebie niezalezne
+    // a nie ze polega na tym ze w jakiejs innej funkcji jest jakis variable
   }
 }
 // to play the game n times:
-playGame(3);
+playGame(5);
