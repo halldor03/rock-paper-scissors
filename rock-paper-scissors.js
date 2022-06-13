@@ -49,9 +49,12 @@ function playRound(computerSelection, playerSelection) {
   }
 }
 
-function scoring(computerSelection, playerSelection) {
-  let playerPoints = 0;
-  let computerPoints = 0;
+function scoring(
+  computerSelection,
+  playerSelection,
+  computerPoints,
+  playerPoints
+) {
   if (
     (playerSelection == "scissors" && computerSelection == "paper") ||
     (playerSelection == "rock" && computerSelection == "scissors") ||
@@ -69,14 +72,22 @@ function scoring(computerSelection, playerSelection) {
     console.log(`Your points: ${playerPoints}`);
     console.log(`Computer points: ${computerPoints}`);
   }
+  return [computerPoints, playerPoints];
 }
 
 function playGame(numberOfGames) {
+  let computerPoints = 0;
+  let playerPoints = 0;
   for (let i = 0; i < numberOfGames; i++) {
     let computerSelection = computerPlay();
     let playerSelection = playerPlay();
     playRound(computerSelection, playerSelection);
-    scoring(computerSelection, playerSelection);
+    [computerPoints, playerPoints] = scoring(
+      computerSelection,
+      playerSelection,
+      computerPoints,
+      playerPoints
+    );
   }
 }
 // to play the game n times:
