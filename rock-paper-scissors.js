@@ -49,46 +49,35 @@ function playRound(computerSelection, playerSelection) {
   }
 }
 
-function scoring(
-  computerSelection,
-  playerSelection,
-  computerPoints,
-  playerPoints
-) {
+function scoring(computerSelection, playerSelection, scoreboard) {
   if (
     (playerSelection == "scissors" && computerSelection == "paper") ||
     (playerSelection == "rock" && computerSelection == "scissors") ||
     (playerSelection == "paper" && computerSelection == "rock")
   ) {
-    playerPoints += 1;
-    console.log(`Your points: ${playerPoints}`);
-    console.log(`Computer points: ${computerPoints}`);
+    scoreboard[1] += 1;
+    console.log(`Your points: ${scoreboard[1]}`);
+    console.log(`Computer points: ${scoreboard[0]}`);
   } else if (
     (computerSelection == "scissors" && playerSelection == "paper") ||
     (computerSelection == "rock" && playerSelection == "scissors") ||
     (computerSelection == "paper" && playerSelection == "rock")
   ) {
-    computerPoints += 1;
-    console.log(`Your points: ${playerPoints}`);
-    console.log(`Computer points: ${computerPoints}`);
+    scoreboard[0] += 1; // adds one to computer points
+    console.log(`Your points: ${scoreboard[1]}`);
+    console.log(`Computer points: ${scoreboard[0]}`);
   }
-  return [computerPoints, playerPoints];
+  return scoreboard;
 }
 
 function playGame(numberOfGames) {
-  let computerPoints = 0;
-  let playerPoints = 0;
+  scoreboard = [0, 0]; // [computer points, player points]
   for (let i = 0; i < numberOfGames; i++) {
     let computerSelection = computerPlay();
     let playerSelection = playerPlay();
     playRound(computerSelection, playerSelection);
-    [computerPoints, playerPoints] = scoring(
-      computerSelection,
-      playerSelection,
-      computerPoints,
-      playerPoints
-    );
+    scoreboard = scoring(computerSelection, playerSelection, scoreboard);
   }
 }
 // to play the game n times:
-playGame(3);
+playGame(5);
