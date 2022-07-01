@@ -48,7 +48,7 @@ function playGame() {
       if (playerPoints == 5 || computerPoints == 5) {
         if (playerPoints > computerPoints) {
           let wonGame = document.querySelector(".resultGameWon");
-          wonGame.textContent = `You won the game ${playerPoints}:${computerPoints}! Press "R" to play again!`;
+          wonGame.textContent = `You won the game ${playerPoints}:${computerPoints}! Press any key to play again!`;
           computerPoints = 0;
           playerPoints = 0;
           const buttons = document.querySelectorAll(".rock, .paper, .scissors");
@@ -58,7 +58,7 @@ function playGame() {
           restartGame();
         } else if (playerPoints < computerPoints) {
           let lostGame = document.querySelector(".resultGameLost");
-          lostGame.textContent = `You lost the game ${computerPoints}:${playerPoints}! Press "R" to play again!`;
+          lostGame.textContent = `You lost the game ${computerPoints}:${playerPoints}! Press any key to play again!`;
           computerPoints = 0;
           playerPoints = 0;
           const buttons = document.querySelectorAll(".rock, .paper, .scissors");
@@ -68,7 +68,7 @@ function playGame() {
           restartGame();
         } else {
           let drawGame = document.querySelector(".resultGameDraw");
-          drawGame.textContent = `It's a draw ${computerPoints}:${playerPoints}! Press "R" to play again!`;
+          drawGame.textContent = `It's a draw ${computerPoints}:${playerPoints}! Press any key to play again!`;
           computerPoints = 0;
           playerPoints = 0;
           const buttons = document.querySelectorAll(".rock, .paper, .scissors");
@@ -84,7 +84,7 @@ function playGame() {
 
 function restartGame() {
   const keyPushedRestart = (e) => {
-    if (e.key == "r") {
+    if (e.key) {
       const buttons = document.querySelectorAll(".rock, .paper, .scissors");
       buttons.forEach((button) => {
         button.disabled = false;
