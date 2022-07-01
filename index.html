@@ -4,21 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Rock, paper and scissors!</title>
     <script src="rock-paper-scissors.js" defer></script>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="startMessage">Press Enter to start the game!</div>
-      <button class="rock">Rock</button>
-      <button class="paper">Paper</button>
-      <button class="scissors">Scissors</button>
-      <div class="currentComputerScore"></div>
-      <div class="currentPlayerScore"></div>
+    <div class="header">
+      <div class="header_txt">Rock, paper, scissors - the game</div>
+    </div>
+    <div class="content">
+      <div class="buttons">
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+      </div>
+      <div class="scoreboard">
+        <div class="currentComputerScore"></div>
+        <div class="currentPlayerScore"></div>
+      </div>
+      <div class="startMessage">Press any key to start the game!</div>
       <div class="resultRound"></div>
-      <div class="resultGameWon"></div>
-      <div class="resultGameLost"></div>
-      <div class="resultGameDraw"></div>
+      <div class="gameResult">
+        <div class="resultGameWon"></div>
+        <div class="resultGameLost"></div>
+        <div class="resultGameDraw"></div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer_txt">Copyright &copy; Kacper Szulc 2022</div>
     </div>
   </body>
 </html>

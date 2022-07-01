@@ -2,7 +2,7 @@ function computerPlay() {
   let choices = ["rock", "paper", "scissors"];
   let result = choices[Math.floor(Math.random() * choices.length)];
   // to check computer's choice:
-  console.log("Computer's choice:" + result);
+  console.log("Computer's choice: " + result);
   return result;
 }
 
@@ -34,7 +34,7 @@ function playGame() {
       const playerSelection = button.classList;
       const computerSelection = computerPlay();
       // to check player's choice:
-      console.log("Player's choice:" + playerSelection);
+      console.log("Player's choice: " + playerSelection);
       playRound(computerSelection, playerSelection);
       [computerPoints, playerPoints] = scoring(
         computerSelection,
@@ -42,20 +42,69 @@ function playGame() {
         computerPoints,
         playerPoints
       );
+      // to check points:
+      console.log("Computers's points: " + computerPoints);
+      console.log("Player's points: " + playerPoints);
       if (playerPoints == 5 || computerPoints == 5) {
         if (playerPoints > computerPoints) {
           let wonGame = document.querySelector(".resultGameWon");
-          wonGame.textContent = `You won the game ${playerPoints}:${computerPoints}! Press Enter to play again!`;
+          wonGame.textContent = `You won the game ${playerPoints}:${computerPoints}! Press "R" to play again!`;
+          computerPoints = 0;
+          playerPoints = 0;
+          const buttons = document.querySelectorAll(".rock, .paper, .scissors");
+          buttons.forEach((button) => {
+            button.disabled = true;
+          });
+          restartGame();
         } else if (playerPoints < computerPoints) {
           let lostGame = document.querySelector(".resultGameLost");
-          lostGame.textContent = `You lost the game ${computerPoints}:${playerPoints}! Press Enter to play again!`;
+          lostGame.textContent = `You lost the game ${computerPoints}:${playerPoints}! Press "R" to play again!`;
+          computerPoints = 0;
+          playerPoints = 0;
+          const buttons = document.querySelectorAll(".rock, .paper, .scissors");
+          buttons.forEach((button) => {
+            button.disabled = true;
+          });
+          restartGame();
         } else {
           let drawGame = document.querySelector(".resultGameDraw");
-          drawGame.textContent = `It's a draw ${computerPoints}:${playerPoints}! Press Enter to play again!`;
+          drawGame.textContent = `It's a draw ${computerPoints}:${playerPoints}! Press "R" to play again!`;
+          computerPoints = 0;
+          playerPoints = 0;
+          const buttons = document.querySelectorAll(".rock, .paper, .scissors");
+          buttons.forEach((button) => {
+            button.disabled = true;
+          });
+          restartGame();
         }
       }
     });
   });
+}
+
+function restartGame() {
+  const keyPushedRestart = (e) => {
+    if (e.key == "r") {
+      const buttons = document.querySelectorAll(".rock, .paper, .scissors");
+      buttons.forEach((button) => {
+        button.disabled = false;
+      });
+      let resultRound = document.querySelector(".resultRound");
+      resultRound.textContent = "";
+      let wonGame = document.querySelector(".resultGameWon");
+      wonGame.textContent = "";
+      let lostGame = document.querySelector(".resultGameLost");
+      lostGame.textContent = "";
+      let currentPlayerScore = document.querySelector(".currentPlayerScore");
+      currentPlayerScore.textContent = `Your points: 0`;
+      let currentComputerScore = document.querySelector(
+        ".currentComputerScore"
+      );
+      currentComputerScore.textContent = `Computer points: 0`;
+      window.removeEventListener("keydown", keyPushedRestart);
+    }
+  };
+  window.addEventListener("keydown", keyPushedRestart);
 }
 
 function scoring(
@@ -95,15 +144,23 @@ function scoring(
 
 const startKey = document.querySelector(".startKey");
 let startMessage = document.querySelector(".startMessage");
-window.addEventListener("keydown", function (e) {
-  if (e.key == "Enter") {
-    startMessage.textContent = "The game has started!";
-    playGame();
-    startMessage.textContent = "";
-  }
+const buttons = document.querySelectorAll(".rock, .paper, .scissors");
+buttons.forEach((button) => {
+  button.disabled = true;
 });
-
-// TO DO:
-// - stop user from clicking "Enter" multiple TimeRanges,
-// - add function end when player/computer reaches 5 points,
-// - css
+const keyPushed = (e) => {
+  if (e.key) {
+    const buttons = document.querySelectorAll(".rock, .paper, .scissors");
+    buttons.forEach((button) => {
+      button.disabled = false;
+    });
+    startMessage.textContent = "";
+    let currentPlayerScore = document.querySelector(".currentPlayerScore");
+    currentPlayerScore.textContent = `Your points: 0`;
+    let currentComputerScore = document.querySelector(".currentComputerScore");
+    currentComputerScore.textContent = `Computer points: 0`;
+    playGame();
+    window.removeEventListener("keydown", keyPushed);
+  }
+};
+window.addEventListener("keydown", keyPushed);
